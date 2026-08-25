@@ -1,0 +1,9 @@
+services:
+  app:
+    image: oven/bun:latest
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: sh -c "bun install --frozen-lockfile && bun run dev"
