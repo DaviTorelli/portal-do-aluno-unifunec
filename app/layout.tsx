@@ -7,6 +7,7 @@ import "./globals.css";
 
 //* Components imports
 import { ThemeContext } from "@/components/context";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import { VLibras } from "@/components/vlibras";
 
 //* Utils imports
@@ -51,8 +52,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           enableSystem
           disableTransitionOnChange
         >
-          {children}
-          <VLibras />
+          <TooltipProvider>
+            {children}
+            <VLibras />
+          </TooltipProvider>
         </ThemeContext>
       </body>
     </html>
