@@ -1,6 +1,7 @@
 "use client";
 
 //* Libraries imports
+import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { LaptopIcon, MoonIcon, SunIcon } from "lucide-react";
 
@@ -28,7 +29,12 @@ const themeConfig = {
 };
 
 export function ThemeButton() {
+  const [mounted, setMounted] = useState<boolean>(false);
   const { theme, setTheme, resolvedTheme } = useTheme();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const currentTheme = (
     theme === "system" ? "system" : resolvedTheme
@@ -39,6 +45,24 @@ export function ThemeButton() {
   const handleToggle = () => {
     setTheme(config.next);
   };
+
+  // Avoid hydration mismatch: theme is undefined on the server
+  if (!mounted) {
+    return (
+      <div className="group">
+        <Button
+          id="theme-button"
+          aria-label="Alternar tema"
+          variant="ghost"
+          size="icon"
+          disabled
+        >
+          <LaptopIcon className="size-4 flex-shrink-0" />
+        </Button>
+      </div>
+    );
+  }
+
   return (
     <div className="group">
       <Button
@@ -49,9 +73,6 @@ export function ThemeButton() {
         size="icon"
       >
         <IconComponent className="size-4 flex-shrink-0" />
-        {/* <span className="max-w-0 whitespace-nowrap opacity-0 transition-all duration-300 group-hover:max-w-xs group-hover:opacity-100 group-data-[collapsible=icon]:group-hover:max-w-0 group-data-[collapsible=icon]:group-hover:opacity-0 pl-2">
-          {config.label}
-        </span> */}
       </Button>
     </div>
   );
