@@ -6,12 +6,13 @@ import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 
 //* Components imports
+import { ThemeContext } from "@/components/context";
 import { VLibras } from "@/components/vlibras";
 
 //* Utils imports
 import { cn } from "@/lib/utils";
 
-const inter = Inter({subsets:['latin'],variable:'--font-sans'});
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,18 +26,33 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Portal do Aluno - UNIFUNEC",
-  description: "Projeto da aula de UX, UI e Acessibilidade - Pós Graduação em Desenvolvimento Web",
+  description:
+    "Projeto da aula de UX, UI e Acessibilidade - Pós Graduação em Desenvolvimento Web",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="pt-BR"
-      className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, "font-sans", inter.variable)}
+      className={cn(
+        "h-full",
+        "antialiased",
+        geistSans.variable,
+        geistMono.variable,
+        "font-sans",
+        inter.variable,
+      )}
     >
       <body className="min-h-full flex flex-col">
-        {children}
-        <VLibras />
+        <ThemeContext
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          <VLibras />
+        </ThemeContext>
       </body>
     </html>
   );

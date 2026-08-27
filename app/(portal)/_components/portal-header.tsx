@@ -3,6 +3,7 @@ import { GraduationCap, LogOut } from "lucide-react";
 
 //* Components imports
 import { Button } from "@/components/ui/button";
+import { ThemeButton } from "@/components/button";
 
 export function PortalHeader() {
   return (
@@ -21,15 +22,15 @@ export function PortalHeader() {
             </span>
           </div>
         </div>
-        
-        <Button
-          id="logout-button"
-          variant="destructive"
-          type="button"
-        >
-          <LogOut className="size-4" aria-hidden="true" />
-          <span className="hidden sm:inline">Sair</span>
-        </Button>
+
+        <div className="flex items-center gap-2">
+          <ThemeButton />
+
+          <Button id="logout-button" variant="destructive" type="button">
+            <LogOut className="size-4" aria-hidden="true" />
+            <span className="hidden sm:inline">Sair</span>
+          </Button>
+        </div>
       </div>
     </header>
   );
