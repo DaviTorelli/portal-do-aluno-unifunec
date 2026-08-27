@@ -2,7 +2,6 @@
 import { Fragment } from "react";
 import {
   AcademicPeriods,
-  Faculty,
   Notifications,
   QuickActions,
   StudentProfile,
