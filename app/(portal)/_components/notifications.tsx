@@ -76,55 +76,74 @@ export function Notifications() {
       <PanelHeading icon={BellIcon}>Notificações</PanelHeading>
       <div className="h-52">
         {notifications.length === 0 ? (
-          <div className="flex h-full flex-col items-center justify-center gap-3 p-6 text-center">
-            <div className="grid size-11 place-items-center rounded-full bg-muted">
-              <BellIcon className="size-5 text-muted-foreground" />
-            </div>
-            <p className="text-sm text-muted-foreground">
-              Você não tem novas notificações.
-            </p>
-          </div>
+          <EmptyNotifications />
         ) : (
           <ScrollArea className="h-full">
             <ul className="divide-y divide-border/70">
               {notifications.map((notification) => (
-                <li
+                <NotificationItem
                   key={notification.id}
-                  className="group flex items-start gap-3 px-5 py-4 sm:px-6"
-                >
-                  <span
-                    className={cn(
-                      "mt-2 size-2 shrink-0 rounded-full",
-                      notification.read
-                        ? "bg-muted-foreground/40"
-                        : "bg-primary",
-                    )}
-                    aria-label={notification.read ? "Lida" : "Não lida"}
-                  />
-                  <div className="min-w-0 flex-1">
-                    <p className="text-sm font-medium text-foreground">
-                      {notification.title}
-                    </p>
-                    <p className="mt-0.5 text-sm text-muted-foreground">
-                      {notification.description}
-                    </p>
-                  </div>
-                  <Button
-                    id={`remove-notification-${notification.id}`}
-                    aria-label={`Remover notificação: ${notification.title}`}
-                    variant="ghost"
-                    size="icon-sm"
-                    className="shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100 focus-visible:opacity-100 hover:text-destructive"
-                    onClick={() => removeNotification(notification.id)}
-                  >
-                    <Trash2Icon />
-                  </Button>
-                </li>
+                  notification={notification}
+                  onRemove={removeNotification}
+                />
               ))}
             </ul>
           </ScrollArea>
         )}
       </div>
     </Panel>
+  );
+}
+
+type NotificationItemProps = {
+  notification: Notification;
+  onRemove: (id: number) => void;
+};
+
+function NotificationItem(props: NotificationItemProps) {
+  return (
+    <li
+      key={props.notification.id}
+      className="group flex items-start gap-3 px-5 py-4 sm:px-6"
+    >
+      <span
+        className={cn(
+          "mt-2 size-2 shrink-0 rounded-full",
+          props.notification.read ? "bg-muted-foreground/40" : "bg-primary",
+        )}
+        aria-label={props.notification.read ? "Lida" : "Não lida"}
+      />
+      <div className="min-w-0 flex-1">
+        <p className="text-sm font-medium text-foreground">
+          {props.notification.title}
+        </p>
+        <p className="mt-0.5 text-sm text-muted-foreground">
+          {props.notification.description}
+        </p>
+      </div>
+      <Button
+        id={`remove-notification-${props.notification.id}`}
+        aria-label={`Remover notificação: ${props.notification.title}`}
+        variant="ghost"
+        size="icon-sm"
+        className="shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100 focus-visible:opacity-100 hover:text-destructive"
+        onClick={() => props.onRemove(props.notification.id)}
+      >
+        <Trash2Icon />
+      </Button>
+    </li>
+  );
+}
+
+function EmptyNotifications() {
+  return (
+    <div className="flex h-full flex-col items-center justify-center gap-3 p-6 text-center">
+      <div className="grid size-11 place-items-center rounded-full bg-muted">
+        <BellIcon className="size-5 text-muted-foreground" />
+      </div>
+      <p className="text-sm text-muted-foreground">
+        Você não tem novas notificações.
+      </p>
+    </div>
   );
 }
