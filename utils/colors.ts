@@ -1,0 +1,1 @@
+export const AVATAR_COLORS: string[] = ["#BC1E09", "#071231", "#CED4D8", "#080808", "#DC0F0F"];

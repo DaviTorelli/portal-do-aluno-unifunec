@@ -1,9 +1,9 @@
 //* Library imports
 import { UserRoundIcon } from "lucide-react";
-import Image from "next/image";
 
 //* Component imports
 import { Panel, PanelHeading } from "@/components/panel";
+import { UserAvatar } from "@/components/user-avatar";
 import { StudentIdCard } from "./student-id-card";
 import { StudentIdCardDialog } from "./student-id-card-dialog";
 
@@ -11,7 +11,7 @@ import { StudentIdCardDialog } from "./student-id-card-dialog";
 import type { StudentProfileData } from "./types";
 
 const student: StudentProfileData = {
-  name: "Nome do aluno completo",
+  name: "John Doe",
   rm: "12345",
   course: "Especialização em Desenvolvimento de Software para Web",
   academicPeriod: "1º Semestre",
@@ -28,25 +28,13 @@ export function StudentProfile() {
       <div className="flex flex-col gap-5 p-5 sm:flex-row sm:items-center sm:p-6">
         {/* Student photo */}
         <div className="flex shrink-0 flex-col items-center gap-2">
-          <div className="relative size-24 overflow-hidden rounded-full border-2 border-primary/30 bg-muted shadow-md">
-            {student.photoUrl ? (
-              <Image
-                src={student.photoUrl}
-                alt={`Foto de ${student.name}`}
-                fill
-                className="object-cover"
-                sizes="96px"
-                priority
-              />
-            ) : (
-              <div className="flex size-full items-center justify-center">
-                <UserRoundIcon
-                  className="size-12 text-muted-foreground/50"
-                  aria-hidden="true"
-                />
-              </div>
-            )}
-          </div>
+          <UserAvatar
+            name={student.name}
+            photoUrl={student.photoUrl}
+            className="size-24 rounded-full border-2 border-primary/30 shadow-md"
+            sizes="96px"
+            priority
+          />
           <p className="max-w-32 wrap-break-word text-center text-xs font-semibold leading-tight tracking-tight text-foreground">
             {student.name}
           </p>
