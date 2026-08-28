@@ -26,6 +26,7 @@ export function QuickActions() {
       label: "Alterar senha de acesso",
       icon: LockKeyholeIcon,
       available: true,
+      href: "/change-password",
     },
     {
       label: "Solicitação de Carteirinha",

@@ -15,6 +15,7 @@ export type OptionItem = {
   icon: LucideIcon;
   available: boolean;
   reason?: string;
+  href?: string;
 };
 
 interface OptionButtonProps extends Omit<ButtonProps, "children"> {
@@ -35,14 +36,15 @@ export function OptionButton({
       description={option.reason ?? option.label}
       variant="ghost"
       aria-disabled={isUnavailable || disabled}
+      href={option.href}
       aria-label={
         isUnavailable
           ? option.reason
-            ? `${option.label}: indisponível. ${option.reason}`
-            : `${option.label}: indisponível`
+          ? `${option.label}: indisponível. ${option.reason}`
+          : `${option.label}: indisponível`
           : option.label
-      }
-      className={cn(
+        }
+        className={cn(
         "h-auto min-h-32 w-full flex-col gap-3 rounded-xl border p-4 text-center whitespace-normal",
         option.available
           ? "cursor-pointer border-primary/25 bg-primary/5 text-primary hover:-translate-y-0.5 hover:border-primary/50 hover:bg-primary/10 hover:text-primary"

@@ -53,9 +53,12 @@ export function ButtonTooltip({
     <Link
       id={buttonProps.id}
       href={href}
-      className={buttonVariants({
-        variant: transparent ? "ghost" : buttonProps.variant,
-      })}
+      className={cn(
+        buttonVariants({
+          variant: transparent ? "ghost" : buttonProps.variant,
+        }),
+        buttonProps.className,
+      )}
       aria-label={buttonProps["aria-label"]}
     >
       {children}
