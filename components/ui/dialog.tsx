@@ -170,3 +170,16 @@ export {
   DialogClose,
   DialogContent,
 };
+
+const Dialog = {
+  Root: DialogRoot,
+  Trigger: DialogTrigger,
+  Portal: DialogPortal,
+  Backdrop: DialogBackdrop,
+  Popup: DialogPopup,
+  Title: DialogTitle,
+  Description: DialogDescription,
+  Close: DialogClose,
+  Content: DialogContent,
+};
+export default Dialog;

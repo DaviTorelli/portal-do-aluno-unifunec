@@ -5,20 +5,16 @@ import { IdCardIcon } from "lucide-react";
 
 //* Component imports
 import { Button } from "@/components/ui/button";
-import {
-  DialogContent,
-  DialogRoot,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import Dialog from "@/components/ui/dialog";
 
 type StudentIdCardDialogProps = {
   children: React.ReactNode;
 };
 
-export function StudentIdCardDialog({ children }: StudentIdCardDialogProps) {
+export function StudentIdCardDialog(props: StudentIdCardDialogProps) {
   return (
-    <DialogRoot>
-      <DialogTrigger
+    <Dialog.Root>
+      <Dialog.Trigger
         id="ver-carteirinha-button"
         render={
           <Button variant="outline" size="sm" type="button" className="w-fit gap-1.5">
@@ -28,7 +24,7 @@ export function StudentIdCardDialog({ children }: StudentIdCardDialogProps) {
         }
       />
 
-      <DialogContent
+      <Dialog.Content
         title="Carteirinha de Estudante"
         icon={IdCardIcon}
         titleId="student-id-card-title"
@@ -37,8 +33,8 @@ export function StudentIdCardDialog({ children }: StudentIdCardDialogProps) {
         className="max-w-xl"
         contentClassName="p-4 sm:p-5"
       >
-        {children}
-      </DialogContent>
-    </DialogRoot>
+        {props.children}
+      </Dialog.Content>
+    </Dialog.Root>
   );
 }
