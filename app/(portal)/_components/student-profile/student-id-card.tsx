@@ -1,6 +1,5 @@
-//* Library imports
-import { UserRoundIcon } from "lucide-react";
-import Image from "next/image";
+//* Component imports
+import { UserAvatar } from "@/components/user-avatar";
 
 //* Type definitions
 import type { StudentProfileData } from "./types";
@@ -9,7 +8,7 @@ type StudentIdCardProps = {
   student: StudentProfileData;
 };
 
-export function StudentIdCard({ student }: StudentIdCardProps) {
+export function StudentIdCard(props: StudentIdCardProps) {
   return (
     <article
       className="overflow-hidden rounded-xl border border-border/60 bg-background shadow-sm"
@@ -44,24 +43,12 @@ export function StudentIdCard({ student }: StudentIdCardProps) {
       <div className="flex flex-col gap-5 p-5 sm:flex-row sm:items-stretch sm:gap-6 sm:p-6">
         {/* Photo */}
         <div className="flex shrink-0 flex-col items-center gap-2 sm:items-start">
-          <div className="relative aspect-[3/4] w-28 overflow-hidden rounded-lg border border-border/70 bg-muted shadow-sm sm:w-32">
-            {student.photoUrl ? (
-              <Image
-                src={student.photoUrl}
-                alt={`Foto de ${student.name}`}
-                fill
-                className="object-cover"
-                sizes="128px"
-              />
-            ) : (
-              <div className="flex size-full items-center justify-center">
-                <UserRoundIcon
-                  className="size-14 text-muted-foreground/40"
-                  aria-hidden="true"
-                />
-              </div>
-            )}
-          </div>
+          <UserAvatar
+            name={props.student.name}
+            photoUrl={props.student.photoUrl}
+            className="aspect-[3/4] w-28 rounded-lg border border-border/70 shadow-sm sm:w-32"
+            sizes="128px"
+          />
         </div>
 
         {/* Fields — typography only, no input-like boxes */}
@@ -72,7 +59,7 @@ export function StudentIdCard({ student }: StudentIdCardProps) {
                 Nome
               </span>
               <p className="text-base font-semibold leading-snug tracking-tight text-foreground sm:text-lg">
-                {student.name}
+                {props.student.name}
               </p>
             </div>
 
@@ -81,7 +68,7 @@ export function StudentIdCard({ student }: StudentIdCardProps) {
                 Curso
               </span>
               <p className="text-sm leading-snug text-foreground/90">
-                {student.course}
+                {props.student.course}
               </p>
             </div>
 
@@ -91,7 +78,7 @@ export function StudentIdCard({ student }: StudentIdCardProps) {
                   Matrícula
                 </span>
                 <p className="font-mono text-sm font-medium tabular-nums text-foreground">
-                  {student.rm}
+                  {props.student.rm}
                 </p>
               </div>
               <div className="flex flex-col gap-1">
@@ -99,7 +86,7 @@ export function StudentIdCard({ student }: StudentIdCardProps) {
                   Validade
                 </span>
                 <p className="text-sm font-medium tabular-nums text-foreground">
-                  {student.validUntil}
+                  {props.student.validUntil}
                 </p>
               </div>
             </div>
