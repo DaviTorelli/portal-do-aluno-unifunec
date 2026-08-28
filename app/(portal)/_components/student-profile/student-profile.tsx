@@ -1,22 +1,15 @@
 //* Library imports
-import { IdCardIcon, UserRoundIcon } from "lucide-react";
+import { UserRoundIcon } from "lucide-react";
 import Image from "next/image";
 
 //* Component imports
 import { Panel, PanelHeading } from "@/components/panel";
-import { Button } from "@/components/ui/button";
+import { StudentIdCard } from "./student-id-card";
+import { StudentIdCardDialog } from "./student-id-card-dialog";
 
 //* Type definitions
-type StudentProfileData = {
-  name: string;
-  rm: string;
-  course: string;
-  academicPeriod: string;
-  class: string;
-  photoUrl?: string;
-};
+import type { StudentProfileData } from "./types";
 
-// Student profile mock data
 const student: StudentProfileData = {
   name: "Nome do aluno completo",
   rm: "12345",
@@ -24,6 +17,7 @@ const student: StudentProfileData = {
   academicPeriod: "1º Semestre",
   class: "Integral - 1º A",
   photoUrl: undefined,
+  validUntil: "19/12/2027",
 };
 
 export function StudentProfile() {
@@ -73,18 +67,9 @@ export function StudentProfile() {
             <ProfileField label="Turma" value={student.class} />
           </dl>
 
-          {/* Student ID card button */}
-          <Button
-            id="ver-carteirinha-button"
-            variant="outline"
-            size="sm"
-            type="button"
-            className="w-fit gap-1.5"
-            disabled
-          >
-            <IdCardIcon className="size-5" aria-hidden="true" />
-            Ver carteirinha
-          </Button>
+          <StudentIdCardDialog>
+            <StudentIdCard student={student} />
+          </StudentIdCardDialog>
         </div>
       </div>
     </Panel>
