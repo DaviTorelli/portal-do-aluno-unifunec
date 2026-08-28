@@ -14,6 +14,7 @@ import Card from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { ButtonTooltip } from "@/components/button/button-tooltip";
 import { Separator } from "@/components/ui/separator";
+import { CaptchaField } from "@/components/captcha";
 import { PasswordInput } from "@/components/input";
 
 const TEST_PASSWORD = "12345678";
@@ -44,6 +45,7 @@ export function ChangePasswordForm() {
   const [newPassword, setNewPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
+  const [isCaptchaSolved, setIsCaptchaSolved] = useState<boolean>(false);
 
   function clearError() {
     if (error) {
@@ -53,6 +55,11 @@ export function ChangePasswordForm() {
 
   function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    if (!isCaptchaSolved) {
+      setError("Resolva a verificação de segurança antes de continuar.");
+      return;
+    }
 
     const validationError = validatePasswordChange(
       currentPassword,
@@ -137,6 +144,8 @@ export function ChangePasswordForm() {
               required
             />
           </div>
+
+          <CaptchaField onSolvedChange={setIsCaptchaSolved} />
         </Card.Content>
 
         <Separator className="my-5" />
@@ -145,11 +154,16 @@ export function ChangePasswordForm() {
           <Button
             id="back-to-portal-button"
             variant="outline"
+            nativeButton={false}
             render={<Link href="/" />}
           >
             Voltar
           </Button>
-          <Button id="change-password-button" type="submit">
+          <Button
+            id="change-password-button"
+            type="submit"
+            disabled={!isCaptchaSolved}
+          >
             Alterar senha
           </Button>
         </Card.Footer>
