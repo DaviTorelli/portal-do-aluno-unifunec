@@ -7,6 +7,7 @@ import "./globals.css";
 
 //* Components imports
 import { ThemeContext } from "@/components/context";
+import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { VLibras } from "@/components/vlibras";
 
@@ -54,6 +55,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           <TooltipProvider>
             {children}
+            <Toaster />
             <VLibras />
           </TooltipProvider>
         </ThemeContext>
