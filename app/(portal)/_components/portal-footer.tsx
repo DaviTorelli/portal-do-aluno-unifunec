@@ -1,3 +1,6 @@
+//* Local imports
+import packageJson from "../../../package.json";
+
 export function PortalFooter() {
   return (
     <footer className="border-t border-border bg-background px-4 py-6 sm:px-6 lg:px-8">
@@ -5,9 +8,8 @@ export function PortalFooter() {
         <span className="font-medium text-foreground">
           UNIFUNEC · Centro Universitário de Santa Fé do Sul
         </span>
-        <span>Copyright © 2026 Ping. Todos os direitos reservados.</span>
-        {/* TODO: Adicionar versão do projeto no package.json ou .env */}
-        <span className="font-mono">v2.0.0</span>
+        <span>Copyright © 2026 - UNIFUNEC. Todos os direitos reservados.</span>
+        <span className="font-mono">v{packageJson.version}</span>
       </div>
     </footer>
   );
