@@ -11,10 +11,10 @@ import { toast } from "sonner";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import Card from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ButtonTooltip } from "@/components/button/button-tooltip";
 import { Separator } from "@/components/ui/separator";
+import { PasswordInput } from "@/components/input";
 
 const TEST_PASSWORD = "12345678";
 
@@ -98,9 +98,8 @@ export function ChangePasswordForm() {
 
           <div className="flex flex-col gap-2">
             <Label htmlFor="current-password">Senha atual</Label>
-            <Input
+            <PasswordInput
               id="current-password"
-              type="password"
               value={currentPassword}
               onChange={(event) => {
                 setCurrentPassword(event.target.value);
@@ -113,9 +112,8 @@ export function ChangePasswordForm() {
 
           <div className="flex flex-col gap-2">
             <Label htmlFor="new-password">Nova senha</Label>
-            <Input
+            <PasswordInput
               id="new-password"
-              type="password"
               value={newPassword}
               onChange={(event) => {
                 setNewPassword(event.target.value);
@@ -128,9 +126,8 @@ export function ChangePasswordForm() {
 
           <div className="flex flex-col gap-2">
             <Label htmlFor="confirm-password">Confirmar nova senha</Label>
-            <Input
+            <PasswordInput
               id="confirm-password"
-              type="password"
               value={confirmPassword}
               onChange={(event) => {
                 setConfirmPassword(event.target.value);
