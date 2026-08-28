@@ -8,7 +8,7 @@ export function PortalFooter() {
         <span className="font-medium text-foreground">
           UNIFUNEC · Centro Universitário de Santa Fé do Sul
         </span>
-        <span>Copyright © 2026 - UNIFUNEC. Todos os direitos reservados.</span>
+        <span>Copyright © {new Date().getFullYear()} - UNIFUNEC. Todos os direitos reservados.</span>
         <span className="font-mono">v{packageJson.version}</span>
       </div>
     </footer>
