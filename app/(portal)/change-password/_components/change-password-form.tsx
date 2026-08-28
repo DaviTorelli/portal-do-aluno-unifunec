@@ -51,6 +51,15 @@ export function ChangePasswordForm() {
     }
   }
 
+  async function handleCopyTestPassword() {
+    try {
+      await navigator.clipboard.writeText(TEST_PASSWORD);
+      toast.success("Senha de teste copiada com sucesso.");
+    } catch {
+      toast.error("Não foi possível copiar a senha de teste.");
+    }
+  }
+
   function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -78,9 +87,10 @@ export function ChangePasswordForm() {
           <ButtonTooltip
             id="test-password-info"
             type="button"
-            description={`Senha para testes: ${TEST_PASSWORD}`}
+            description={`Senha para testes: ${TEST_PASSWORD} (clique para copiar)`}
             variant="ghost"
-            aria-label="Informação sobre a senha de teste"
+            onClick={handleCopyTestPassword}
+            aria-label="Copiar a senha de teste"
           >
             <InfoIcon className="size-4" aria-hidden="true" />
           </ButtonTooltip>
@@ -106,6 +116,7 @@ export function ChangePasswordForm() {
                 clearError();
               }}
               autoComplete="current-password"
+              autoFocus
               required
             />
           </div>
@@ -145,6 +156,7 @@ export function ChangePasswordForm() {
           <Button
             id="back-to-portal-button"
             variant="outline"
+            nativeButton={false}
             render={<Link href="/" />}
           >
             Voltar

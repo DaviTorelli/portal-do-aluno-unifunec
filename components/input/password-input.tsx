@@ -28,7 +28,7 @@ const PasswordInput = forwardRef<HTMLInputElement, InputProps>(
           variant="ghost"
           size="sm"
           className="absolute top-0 right-0 h-full px-3 py-2 hover:bg-transparent"
-          onPointerDown={() => setShowPassword((prev) => !prev)}
+          onClick={() => setShowPassword((prev) => !prev)}
           disabled={disabled}
         >
           {showPassword && !disabled ? (
