@@ -96,11 +96,11 @@ type ProfileFieldProps = {
   value: string;
 };
 
-function ProfileField({ label, value }: ProfileFieldProps) {
+function ProfileField(props: ProfileFieldProps) {
   return (
     <div>
-      <dt className="inline font-semibold text-foreground">{label}:</dt>{" "}
-      <dd className="inline text-muted-foreground">{value}</dd>
+      <dt className="inline font-semibold text-foreground">{props.label}:</dt>{" "}
+      <dd className="inline text-muted-foreground">{props.value}</dd>
     </div>
   );
 }
