@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portal do Aluno UNIFUNEC
 
-## Getting Started
+Portal do aluno construído com Next.js 16, React 19, Tailwind CSS 4 e Biome.
 
-First, run the development server:
+## Índice
+
+- [Requisitos](#requisitos)
+- [Executando com Bun](#executando-com-bun)
+- [Executando com Docker](#executando-com-docker)
+- [Scripts disponíveis](#scripts-disponíveis)
+- [Estrutura do projeto](#estrutura-do-projeto)
+
+## Requisitos
+
+- [Bun](https://bun.sh) 1.3.14 ou superior (execução local)
+- [Docker](https://docs.docker.com/get-docker/) com Docker Compose (execução em container)
+
+## Executando com Bun
+
+Instale as dependências:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+bun install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Inicie o servidor de desenvolvimento:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+bun run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Acesse [http://localhost:3000](http://localhost:3000).
 
-## Learn More
+Para gerar e rodar a build de produção:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+bun run build
+bun run start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Executando com Docker
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+O `docker-compose.yml` já sobe a aplicação em modo de desenvolvimento usando a imagem oficial do Bun, com o diretório do projeto montado como volume (hot reload funciona normalmente).
 
-## Deploy on Vercel
+```bash
+docker compose up
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+A aplicação fica disponível em [http://localhost:3000](http://localhost:3000).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Para rodar em segundo plano e depois parar:
+
+```bash
+docker compose up -d
+docker compose down
+```
+
+Para reconstruir as dependências após alterações no `package.json`:
+
+```bash
+docker compose up --force-recreate
+```
+
+## Scripts disponíveis
+
+| Script | Descrição |
+| --- | --- |
+| `bun run dev` | Servidor de desenvolvimento |
+| `bun run build` | Verificação com Biome e build de produção |
+| `bun run start` | Servidor de produção (requer build) |
+| `bun run lint` | Verificação de lint e formatação |
+| `bun run lint:fix` | Corrige problemas de lint automaticamente |
+| `bun run format` | Formata o código |
+
+## Estrutura do projeto
+
+```
+app/         Rotas e páginas (App Router)
+components/  Componentes de UI compartilhados
+lib/         Configurações e integrações
+utils/       Funções utilitárias
+public/      Arquivos estáticos
+```
